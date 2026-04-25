@@ -1,0 +1,15 @@
+name: 30-Second Timer
+
+on:
+  workflow_dispatch:   # یعنی فقط با دکمه یا API اجرا می‌شود
+
+jobs:
+  count:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print time every second for 30 seconds
+        run: |
+          for i in {1..30}; do
+            echo "$(date -u +"%Y-%m-%d %H:%M:%S UTC") - second $i"
+            sleep 1
+          done
