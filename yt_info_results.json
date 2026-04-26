@@ -1,0 +1,32 @@
+[
+  {
+    "status": "failed",
+    "error": "ERROR: [youtube] 12J_LLPRfrU: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies",
+    "index": 1,
+    "url": "https://www.youtube.com/watch?v=12J_LLPRfrU"
+  },
+  {
+    "status": "failed",
+    "error": "ERROR: [youtube] N1-YCET-39M: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies",
+    "index": 2,
+    "url": "https://www.youtube.com/watch?v=N1-YCET-39M"
+  },
+  {
+    "status": "failed",
+    "error": "ERROR: [youtube] d6RzGhpV1Vg: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies",
+    "index": 3,
+    "url": "https://www.youtube.com/watch?v=d6RzGhpV1Vg"
+  },
+  {
+    "title": "یادگیری ماشین با پایتون - استاد جادی",
+    "duration": 0,
+    "channel": "Maktabkhooneh",
+    "view_count": 198605,
+    "webpage_url": "https://www.youtube.com/playlist?list=PLAu43_uf7P1-p4jiGyLyXnnq6KJDSYtlW",
+    "thumbnail": "",
+    "description": "",
+    "status": "ok",
+    "index": 4,
+    "url": "https://www.youtube.com/watch?v=yGTnIy5m_L8&list=PLAu43_uf7P1-p4jiGyLyXnnq6KJDSYtlW"
+  }
+]
