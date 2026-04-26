@@ -1,29 +1,81 @@
 {
   "last_update": null,
   "total_videos": 4,
-  "successful": 0,
-  "failed": 4,
-  "videos": [],
-  "errors": [
+  "successful": 4,
+  "failed": 0,
+  "videos": [
     {
-      "index": 1,
-      "url": "https://www.youtube.com/watch?v=12J_LLPRfrU",
-      "error": "ERROR: [youtube] 12J_LLPRfrU: Requested format is not available. Use --list-formats for a list of available formats"
+      "id": "12J_LLPRfrU",
+      "title": "بررسی عمیق هک مونگوبلید: هکرها چطوری فکر می کنن",
+      "description": "این ویدئو رو کمی قبل از خیزش اخیر مردم ضبط کرده بودم ولی با اون خبرها دیگه منتشرش نکردم. الان فکر کردم خوبه منتشر بشه که در آرشیو باشه. توی این ویدئو یکی از هکرهای اخیر رو می بینیم و بررسی می کنیم که یه هکر چطوری فکر می کنه تا بالاخره با چیدن چیزها کنار هم می تونه به یه سیستم نفوذ کنه. به امید آزادی همه مون.\n\nبرای حمایت:\nپتریان: https://www.patreon.com/jadijadi\nیوتیوب: https://www.youtube.com/channel/UCgKePkWtPuF36bJy0n2cEMQ/join\nبقیه لینک‌ها: https://linktr.ee/jadijadi",
+      "duration": 1580,
+      "upload_date": "20260225",
+      "uploader": "Jadi Mirmirani",
+      "view_count": 14924,
+      "like_count": 556,
+      "categories": [
+        "Science & Technology"
+      ],
+      "tags": [],
+      "url": "https://www.youtube.com/watch?v=12J_LLPRfrU"
     },
     {
-      "index": 2,
-      "url": "https://www.youtube.com/watch?v=N1-YCET-39M",
-      "error": "ERROR: [youtube] N1-YCET-39M: Requested format is not available. Use --list-formats for a list of available formats"
+      "id": "N1-YCET-39M",
+      "title": "How to Change Default Ollama Model Download Folder from Local Disk C in Windows",
+      "description": "In this tutorial we will see how to change ollama model default directory to different folder in windows to save ai models",
+      "duration": 167,
+      "upload_date": "20250310",
+      "uploader": "United Top Tech",
+      "view_count": 6410,
+      "like_count": 94,
+      "categories": [
+        "Science & Technology"
+      ],
+      "tags": [
+        "ollama change directory",
+        "how to change ollama model default directory",
+        "change model location ollama",
+        "how to change ollama folder",
+        "ollama",
+        "ai",
+        "ai model",
+        "ollama tutorial",
+        "how to use ollama",
+        "how to run ollama locally",
+        "llm local",
+        "run llm models locally",
+        "ollama tutorial for beginners"
+      ],
+      "url": "https://www.youtube.com/watch?v=N1-YCET-39M"
     },
     {
-      "index": 3,
-      "url": "https://www.youtube.com/watch?v=d6RzGhpV1Vg",
-      "error": "ERROR: [youtube] d6RzGhpV1Vg: Requested format is not available. Use --list-formats for a list of available formats"
+      "id": "d6RzGhpV1Vg",
+      "title": "n8n رو روی سرور خودتون نصب کنین و با کریپتو و تلگرام یه اتوماسیون ساده بسازین",
+      "description": "این روزها از n8n زیاد می‌شنویم؛ سیستمی برای ساخت فلوهای اتوماسیونی با کلی اتصال به چیزهای مختلف. ولی روی سایت خودش برای استفاده ازش لازمه ۲۵ دلار در ماه بدیم که کار رو سخت می‌کنه.\n\nتوی این ویدئو نگاهی داریم به این ابزار خیلی باحال و می‌بینین که اولا چطوری می‌شه به شیوه سلف هاست نصبش کرد و به عنوان یه نرم افزار آزاد، رایگان ازش استفاده کرد و بعدش هم باهاش یه اتوماسیون می‌سازیم که هر نیم ساعت یکبار قیمت دوج کوین رو چک کنه و اگر اومده بود زیر ۰.۱۵، توی تلگرام بهمون خبر بده.\n\nامیدوارم شما هم چیزهای باحالی برای خودتون بسازین:\n\nسایت n8n:  https://n8n.io/\nراهنمای نصب ان ۸ ان: https://docs.n8n.io/hosting/installation/docker/\n\nنکته مهم: الان دیدم که لایسنس نرم افزار کاملا آزاد نیست. برای استفاده شخصی و حتی داخلی بیزنس رایگانه ولی لایسنس آزاد واقعی نیست. \n\nبرای حمایت:\nپتریان: https://www.patreon.com/jadijadi\nیوتیوب: https://www.youtube.com/channel/UCgKePkWtPuF36bJy0n2cEMQ/join\nبقیه لینک‌ها: https://linktr.ee/jadijadi",
+      "duration": 1183,
+      "upload_date": "20250517",
+      "uploader": "Jadi Mirmirani",
+      "view_count": 223136,
+      "like_count": 5269,
+      "categories": [
+        "Science & Technology"
+      ],
+      "tags": [],
+      "url": "https://www.youtube.com/watch?v=d6RzGhpV1Vg"
     },
     {
-      "index": 4,
-      "url": "https://www.youtube.com/watch?v=yGTnIy5m_L8&list=PLAu43_uf7P1-p4jiGyLyXnnq6KJDSYtlW",
-      "error": "ERROR: [youtube] yGTnIy5m_L8: Requested format is not available. Use --list-formats for a list of available formats"
+      "id": "PLAu43_uf7P1-p4jiGyLyXnnq6KJDSYtlW",
+      "title": "یادگیری ماشین با پایتون - استاد جادی",
+      "description": "",
+      "duration": null,
+      "upload_date": null,
+      "uploader": "Maktabkhooneh",
+      "view_count": 198605,
+      "like_count": null,
+      "categories": null,
+      "tags": [],
+      "url": "https://www.youtube.com/watch?v=yGTnIy5m_L8&list=PLAu43_uf7P1-p4jiGyLyXnnq6KJDSYtlW"
     }
-  ]
+  ],
+  "errors": []
 }
