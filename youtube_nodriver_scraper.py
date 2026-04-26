@@ -4,22 +4,20 @@ import json
 import pickle
 import os
 import sys
-import re
 
 import nodriver as uc
 
 URL_FILE = "urls.txt"
 COOKIE_FILE = "cookies.pkl"
 OUTPUT_FILE = "yt_results.json"
+CHROME_PATH = "/usr/bin/chromium-browser"   # مسیر کرومیم نصب شده
 
 async def save_cookies(page, path):
-    """ذخیره کوکی‌ها در فایل"""
     cookies = await page.cookies.all()
     with open(path, "wb") as f:
         pickle.dump(cookies, f)
 
 async def load_cookies(page, path):
-    """بارگذاری کوکی‌ها از فایل"""
     if os.path.exists(path):
         with open(path, "rb") as f:
             cookies = pickle.load(f)
@@ -29,14 +27,12 @@ async def load_cookies(page, path):
     return False
 
 async def get_video_info(browser, video_url):
-    """استخراج اطلاعات یک ویدیو با تزریق JavaScript"""
     page = None
     try:
         page = await browser.get(video_url)
         await page
         await asyncio.sleep(3)
 
-        # تزریق اسکریپت برای دریافت ytInitialPlayerResponse
         script = """
         () => {
             if (window.ytInitialPlayerResponse && window.ytInitialPlayerResponse.videoDetails) {
@@ -85,24 +81,23 @@ async def main():
     with open(URL_FILE, "r") as f:
         urls = [line.strip() for line in f if line.strip() and not line.startswith("#")]
 
-    print(f"Starting Nodriver in headless mode (xvfb)...")
-    # تنظیمات کلیدی: headless=True, sandbox=False
+    print("Starting Nodriver with explicit Chromium path...")
     browser = await uc.start(
         headless=True,
         sandbox=False,
+        browser_executable_path=CHROME_PATH,
         browser_args=[
             '--disable-blink-features=AutomationControlled',
             '--no-sandbox',
-            '--disable-dev-shm-usage'
+            '--disable-dev-shm-usage',
+            '--disable-gpu'
         ]
     )
 
     try:
-        # بارگذاری کوکی در صورت وجود
         test_page = await browser.get("https://www.youtube.com")
-        cookies_loaded = await load_cookies(test_page, COOKIE_FILE)
-        if cookies_loaded:
-            await test_page.reload()
+        await load_cookies(test_page, COOKIE_FILE)
+        await test_page.reload()
         await asyncio.sleep(2)
         await test_page.close()
 
@@ -115,7 +110,6 @@ async def main():
             results.append(result)
             await asyncio.sleep(2)
 
-        # ذخیره کوکی‌ها برای دفعات بعد
         save_page = await browser.get("https://www.youtube.com")
         await save_cookies(save_page, COOKIE_FILE)
         await save_page.close()
@@ -124,7 +118,6 @@ async def main():
             json.dump(results, f, indent=2, ensure_ascii=False)
 
         print(f"Done. Results saved to {OUTPUT_FILE}")
-
     finally:
         browser.stop()
 
