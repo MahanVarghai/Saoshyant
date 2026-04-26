@@ -1,10 +1,32 @@
 import json
 import sys
 import os
+import re
 from yt_dlp import YoutubeDL
 
+def clean_cookie_file(filepath):
+    """اصلاح فایل کوکی: حذف پیشوند #HttpOnly_ و نرمال‌سازی خطوط"""
+    with open(filepath, 'r', encoding='utf-8') as f:
+        lines = f.readlines()
+
+    cleaned = []
+    for line in lines:
+        # نگه‌داشتن خطوط کامنت اصلی (شروع با # و بدون HttpOnly_)
+        if line.startswith('#') and 'HttpOnly_' not in line:
+            cleaned.append(line)
+            continue
+
+        # حذف # (اگر وجود دارد) و سپس حذف پیشوند HttpOnly_
+        # الگو: ممکن است # داشته باشد یا نه، سپس HttpOnly_
+        stripped = re.sub(r'^#?\s*HttpOnly_', '', line)
+        if stripped and not stripped.startswith('#'):
+            cleaned.append(stripped)
+        # اگر خط بعد از حذف پیشوند خالی شد، نادیده گرفته می‌شود
+
+    with open(filepath, 'w', encoding='utf-8') as f:
+        f.writelines(cleaned)
+
 def main():
-    # خواندن لینک‌ها از فایل urls.txt (هر خط یک لینک)
     urls = []
     try:
         with open('urls.txt', 'r', encoding='utf-8') as f:
@@ -20,7 +42,6 @@ def main():
         print("⚠️ هیچ لینکی در urls.txt وجود ندارد.")
         sys.exit(0)
 
-    # دریافت محتوای کوکی از متغیر محیطی (Secret)
     cookie_content = os.environ.get('YT_COOKIES')
     if not cookie_content:
         print("❌ متغیر محیطی YT_COOKIES تنظیم نشده است.")
@@ -29,6 +50,10 @@ def main():
     # نوشتن فایل موقت کوکی
     with open('cookies.txt', 'w', encoding='utf-8') as f:
         f.write(cookie_content)
+
+    # تمیزکاری خودکار
+    clean_cookie_file('cookies.txt')
+    print("✅ فایل کوکی تمیز و آماده شد.")
 
     all_info = []
     errors = []
@@ -39,7 +64,7 @@ def main():
             ydl_opts = {
                 'quiet': True,
                 'no_warnings': True,
-                'cookiefile': 'cookies.txt',   # استفاده از فایل کوکی
+                'cookiefile': 'cookies.txt',
                 'extract_flat': False,
             }
 
@@ -66,9 +91,8 @@ def main():
             print(f"   ❌ خطا: {e}")
             errors.append({'index': index, 'url': url, 'error': str(e)})
 
-    # ساخت JSON نهایی
     output = {
-        'last_update': None,  # می‌توانید یک زمان اضافه کنید اگر خواستید
+        'last_update': None,
         'total_videos': len(urls),
         'successful': len(all_info),
         'failed': len(errors),
