@@ -1,4 +1,4 @@
-name: Fetch YouTube Videos Info
+name: Fetch YouTube Videos Info In Text
 
 on:
   workflow_dispatch:
