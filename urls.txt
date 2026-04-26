@@ -1,0 +1,10 @@
+https://www.google.com
+https://httpbin.org/status/500
+https://httpbin.org/delay/5
+https://www.github.com
+https://httpbin.org/status/404
+https://httpbin.org/redirect/3
+https://httpbin.org/status/200
+https://neverssl.com
+https://httpbin.org/delay/8
+https://www.cloudflare.com
