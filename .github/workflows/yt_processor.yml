@@ -1,35 +1,68 @@
-name: YouTube Metadata Extractor (Flat Playlist)
+# نام وروکفلو
+name: YouTube Metadata Extractor for Mahan (High-Performance)
 
+# رویداد اجرا: فعال‌سازی دستی از طریق دکمه "Run workflow" در گیت‌هاب
 on:
   workflow_dispatch:
-    inputs:
-      trigger:
-        description: 'Manual trigger'
-        required: false
 
 jobs:
-  extract:
+  # تعریف یک job به نام 'extract-youtube-info'
+  extract-youtube-info:
+    # اجرا روی آخرین نسخه اوبونتو
     runs-on: ubuntu-latest
+    # مجوزهای مورد نیاز: برای commit و push فایل نتایج
+    permissions:
+      contents: write
+
     steps:
+      # --- 1. مرحله اول: دریافت کدهای مخزن شما (checkout) ---
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # --- 2. مرحله دوم: نصب پایتون ---
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Install dependencies
+      # --- 3. مرحله سوم (قلب راه‌حل): نصب yt-dlp و بروزترین ارائه‌دهنده توکن ---
+      - name: Install yt-dlp and POT Provider (Rust)
         run: |
-          pip install yt-dlp
+          # 1. به‌روزرسانی pip و نصب آخرین نسخه yt-dlp
+          pip install --upgrade pip
+          pip install -U yt-dlp
+          
+          # 2. دانلود فایل باینری Rust POT Provider (نسخه لینوکس)
+          # آدرس همیشه به آخرین نسخه منتشرشده اشاره دارد
+          wget https://github.com/jim60105/bgutil-ytdlp-pot-provider-rs/releases/latest/download/bgutil-pot-linux-x86_64
+          
+          # 3. قابل اجرا کردن فایل باینری
+          chmod +x bgutil-pot-linux-x86_64
+          
+          # 4. انتقال فایل به یک مسیر سیستم برای اجرای آسان
+          sudo mv bgutil-pot-linux-x86_64 /usr/local/bin/bgutil-pot
+          
+          # 5. دانلود و نصب پلاگین yt-dlp مختص این ارائه‌دهنده
+          wget https://github.com/jim60105/bgutil-ytdlp-pot-provider-rs/releases/latest/download/bgutil-ytdlp-pot-provider-rs.zip
+          # ایجاد دایرکتوری پلاگین‌ها در صورتی که وجود نداشته باشد
+          mkdir -p /home/runner/.local/share/yt-dlp/plugins
+          # استخراج فایل‌های پلاگین در دایرکتوری مربوطه
+          unzip bgutil-ytdlp-pot-provider-rs.zip -d /home/runner/.local/share/yt-dlp/plugins/
 
-      - name: Run extraction script
-        run: python yt_scraper.py
+      # --- 4. مرحله چهارم: اجرای اسکریپت استخراج اطلاعات ویدیوها ---
+      - name: Run info extraction script
+        # دستور اجرای فایل پایتونی که در مرحله بعد می‌سازیم
+        run: python yt_info_v3.py
 
-      - name: Commit and push results
+      # --- 5. مرحله پنجم: commit و push کردن فایل نتایج به مخزن ---
+      - name: Commit results
         run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-          git add yt_results.json
-          git commit -m "Update YouTube metadata" || echo "No changes"
+          # تنظیم هویت کاربر git
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          # افزودن فایل نتایج به stage
+          git add yt_info_results.json
+          # commit کردن (فقط در صورت وجود تغییر)
+          git diff --staged --quiet || git commit -m "Add YouTube metadata results"
+          # push کردن تغییرات به مخزن
           git push
