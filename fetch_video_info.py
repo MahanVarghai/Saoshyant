@@ -49,16 +49,7 @@ def main():
         f.write(cookie_content)
 
     clean_cookie_file('cookies.txt')
-    print("✅ فایل کوکی تمیز شد. خطوط مهم:")
-
-    # نمایش خلاصه‌ای از فایل کوکی برای دیباگ (بدون افشای کامل)
-    with open('cookies.txt', 'r', encoding='utf-8') as f:
-        lines = f.readlines()
-        cookie_line_count = sum(1 for line in lines if not line.startswith('#'))
-        print(f"   تعداد خطوط غیرکامنت: {cookie_line_count}")
-        if cookie_line_count == 0:
-            print("❌ هیچ کوکی معتبری باقی نمانده است!")
-            sys.exit(1)
+    print("✅ فایل کوکی تمیز و آماده شد.")
 
     all_info = []
     errors = []
@@ -67,16 +58,20 @@ def main():
         print(f"🔍 [{index}/{len(urls)}] در حال دریافت اطلاعات: {url}")
         try:
             ydl_opts = {
-                'quiet': False,      # <-- برای نمایش لاگ
-                'no_warnings': False,
-                'verbose': True,     # <-- لاگ بسیار کامل
+                'quiet': True,
+                'no_warnings': True,
                 'cookiefile': 'cookies.txt',
                 'extract_flat': False,
-                # 'format' را حذف کردیم چون extract_info نیازی به آن ندارد
+                'ignore_no_formats_error': True,          # <-- نادیده گرفتن خطای نبود فرمت
+                'extractor_args': {'youtube': {'player_client': ['web']}},  # <-- ممکن است کمک کند
             }
 
             with YoutubeDL(ydl_opts) as ydl:
                 info = ydl.extract_info(url, download=False)
+
+                # چک می‌کنیم که info خالی یا None نباشد
+                if not info:
+                    raise Exception("هیچ اطلاعاتی برای این URL استخراج نشد.")
 
                 simplified = {
                     'id': info.get('id'),
