@@ -17,7 +17,6 @@ def clean_cookie_file(filepath):
             continue
 
         # حذف # (اگر وجود دارد) و سپس حذف پیشوند HttpOnly_
-        # الگو: ممکن است # داشته باشد یا نه، سپس HttpOnly_
         stripped = re.sub(r'^#?\s*HttpOnly_', '', line)
         if stripped and not stripped.startswith('#'):
             cleaned.append(stripped)
@@ -66,6 +65,7 @@ def main():
                 'no_warnings': True,
                 'cookiefile': 'cookies.txt',
                 'extract_flat': False,
+                'format': 'best',          # <-- اضافه شد تا از خطای فرمت جلوگیری کند
             }
 
             with YoutubeDL(ydl_opts) as ydl:
