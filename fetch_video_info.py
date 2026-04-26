@@ -134,6 +134,7 @@ def main():
 
             # ---- ساخت اطلاعات JSON ----
             simplified = {
+                'index': index,
                 'id': video_id,
                 'title': title,
                 'description': info.get('description'),
