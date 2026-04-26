@@ -21,20 +21,10 @@ jobs:
           echo "And says: Hello from GitHub Actions!" >> response.txt
           echo "Time: $(date -u)" >> response.txt
 
-      - name: Commit and push response
-        id: commit
+      - name: Commit and push
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git add response.txt
-          git commit -m "Update response" || echo "No changes to commit"
-          git push
-          # ذخیره commit hash بعد از push
-          echo "COMMIT_HASH=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
-
-      - name: Save commit hash to file
-        run: |
-          echo "${{ steps.commit.outputs.COMMIT_HASH }}" > last_commit.txt
-          git add last_commit.txt
-          git commit -m "Update last commit hash" || true
+          git commit -m "Update response" || echo "No changes"
           git push
