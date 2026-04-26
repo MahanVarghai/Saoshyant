@@ -20,7 +20,6 @@ def clean_cookie_file(filepath):
         stripped = re.sub(r'^#?\s*HttpOnly_', '', line)
         if stripped and not stripped.startswith('#'):
             cleaned.append(stripped)
-        # اگر خط بعد از حذف پیشوند خالی شد، نادیده گرفته می‌شود
 
     with open(filepath, 'w', encoding='utf-8') as f:
         f.writelines(cleaned)
@@ -46,13 +45,20 @@ def main():
         print("❌ متغیر محیطی YT_COOKIES تنظیم نشده است.")
         sys.exit(1)
 
-    # نوشتن فایل موقت کوکی
     with open('cookies.txt', 'w', encoding='utf-8') as f:
         f.write(cookie_content)
 
-    # تمیزکاری خودکار
     clean_cookie_file('cookies.txt')
-    print("✅ فایل کوکی تمیز و آماده شد.")
+    print("✅ فایل کوکی تمیز شد. خطوط مهم:")
+
+    # نمایش خلاصه‌ای از فایل کوکی برای دیباگ (بدون افشای کامل)
+    with open('cookies.txt', 'r', encoding='utf-8') as f:
+        lines = f.readlines()
+        cookie_line_count = sum(1 for line in lines if not line.startswith('#'))
+        print(f"   تعداد خطوط غیرکامنت: {cookie_line_count}")
+        if cookie_line_count == 0:
+            print("❌ هیچ کوکی معتبری باقی نمانده است!")
+            sys.exit(1)
 
     all_info = []
     errors = []
@@ -61,11 +67,12 @@ def main():
         print(f"🔍 [{index}/{len(urls)}] در حال دریافت اطلاعات: {url}")
         try:
             ydl_opts = {
-                'quiet': True,
-                'no_warnings': True,
+                'quiet': False,      # <-- برای نمایش لاگ
+                'no_warnings': False,
+                'verbose': True,     # <-- لاگ بسیار کامل
                 'cookiefile': 'cookies.txt',
                 'extract_flat': False,
-                'format': 'best',          # <-- اضافه شد تا از خطای فرمت جلوگیری کند
+                # 'format' را حذف کردیم چون extract_info نیازی به آن ندارد
             }
 
             with YoutubeDL(ydl_opts) as ydl:
