@@ -19,7 +19,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # دریافت کامل تاریخچه برای rebase
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -43,14 +43,18 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          
-          # Pull آخرین تغییرات و rebase
-          git pull --rebase origin main
-          
+
           git add videos_info.json
           if git diff --staged --quiet; then
             echo "No changes to commit."
-          else
-            git commit -m "Update videos_info.json [skip ci]"
-            git push
+            exit 0
           fi
+
+          # ابتدا کامیت محلی
+          git commit -m "Update videos_info.json [skip ci]"
+
+          # دریافت تغییرات ریموت و rebase کردن کامیت خودمان روی آن
+          # اگر تداخلی پیش آمد، نسخهٔ ما نگه داشته شود
+          git pull --rebase -X theirs origin main
+
+          git push
