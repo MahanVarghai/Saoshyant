@@ -11,13 +11,14 @@
       "duration": 1580,
       "upload_date": "20260225",
       "uploader": "Jadi Mirmirani",
-      "view_count": 14924,
+      "view_count": 14925,
       "like_count": 557,
       "categories": [
         "Science & Technology"
       ],
       "tags": [],
-      "url": "https://www.youtube.com/watch?v=12J_LLPRfrU"
+      "url": "https://www.youtube.com/watch?v=12J_LLPRfrU",
+      "thumbnail": "thumbnails/12J_LLPRfrU.jpg"
     },
     {
       "id": "N1-YCET-39M",
@@ -46,7 +47,8 @@
         "run llm models locally",
         "ollama tutorial for beginners"
       ],
-      "url": "https://www.youtube.com/watch?v=N1-YCET-39M"
+      "url": "https://www.youtube.com/watch?v=N1-YCET-39M",
+      "thumbnail": "thumbnails/N1-YCET-39M.jpg"
     },
     {
       "id": "d6RzGhpV1Vg",
@@ -61,7 +63,8 @@
         "Science & Technology"
       ],
       "tags": [],
-      "url": "https://www.youtube.com/watch?v=d6RzGhpV1Vg"
+      "url": "https://www.youtube.com/watch?v=d6RzGhpV1Vg",
+      "thumbnail": "thumbnails/d6RzGhpV1Vg.jpg"
     },
     {
       "id": "PLAu43_uf7P1-p4jiGyLyXnnq6KJDSYtlW",
@@ -74,7 +77,8 @@
       "like_count": null,
       "categories": null,
       "tags": [],
-      "url": "https://www.youtube.com/watch?v=yGTnIy5m_L8&list=PLAu43_uf7P1-p4jiGyLyXnnq6KJDSYtlW"
+      "url": "https://www.youtube.com/watch?v=yGTnIy5m_L8&list=PLAu43_uf7P1-p4jiGyLyXnnq6KJDSYtlW",
+      "thumbnail": "thumbnails/PLAu43_uf7P1-p4jiGyLyXnnq6KJDSYtlW.jpg"
     }
   ],
   "errors": []
