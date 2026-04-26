@@ -18,8 +18,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # دریافت کامل تاریخچه برای rebase
 
-      - name: Set up Node.js   # <-- مرحله جدید
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -37,10 +39,14 @@ jobs:
           YT_COOKIES: ${{ secrets.YT_COOKIES }}
         run: python fetch_video_info.py
 
-      - name: Commit updated videos_info.json
+      - name: Commit and push updated videos_info.json
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Pull آخرین تغییرات و rebase
+          git pull --rebase origin main
+          
           git add videos_info.json
           if git diff --staged --quiet; then
             echo "No changes to commit."
