@@ -1,25 +1,28 @@
 name: Fetch YouTube Videos Info
 
 on:
-  workflow_dispatch:            # اجرای دستی از تب Actions
+  workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *'        # هر روز ساعت ۳:۳۰ به وقت ایران (UTC 0:0)
+    - cron: '0 0 * * *'
   push:
-    branches: [main]            # فقط در صورت تغییر urls.txt اجرا شود
+    branches: [main]
     paths:
       - 'urls.txt'
 
 jobs:
   fetch:
     runs-on: ubuntu-latest
-
-    # دسترسی نوشتن در مخزن برای کامیت فایل JSON
     permissions:
       contents: write
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Set up Node.js   # <-- مرحله جدید
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -31,11 +34,10 @@ jobs:
 
       - name: Run fetch script
         env:
-          YT_COOKIES: ${{ secrets.YT_COOKIES }}   # تزریق Secret به محیط
+          YT_COOKIES: ${{ secrets.YT_COOKIES }}
         run: python fetch_video_info.py
 
       - name: Commit updated videos_info.json
-        # اگر تغییری در فایل نباشد، کامیتی انجام نمی‌شود
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
