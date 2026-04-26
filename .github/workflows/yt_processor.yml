@@ -36,7 +36,7 @@ jobs:
           unzip bgutil-ytdlp-pot-provider-rs.zip -d /home/runner/.local/share/yt-dlp/plugins/
 
       - name: Run info extraction script
-        run: python yt_info_v3.py
+        run: python yt_scraper.py
 
       - name: Commit results
         run: |
