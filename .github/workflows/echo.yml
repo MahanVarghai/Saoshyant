@@ -17,9 +17,9 @@ jobs:
 
       - name: Write response to file
         run: |
-          echo "Workflow received: '${{ github.event.inputs.message }}'" > response.txt
-          echo "And says: Hello from GitHub Actions!" >> response.txt
-          echo "Time: $(date -u)" >> response.txt
+          echo "Workflow received: '${{ github.event.inputs.message }}'" > feedback.txt
+          echo "And says: Hello from GitHub Actions!" >> feedback.txt
+          echo "Time: $(date -u)" >> feedback.txt
 
       - name: Commit and push response
         run: |
