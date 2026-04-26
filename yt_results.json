@@ -1,44 +1,26 @@
 [
   {
+    "status": "failed",
+    "error": "Video details not found",
     "index": 1,
-    "url": "https://www.youtube.com/watch?v=12J_LLPRfrU",
-    "status": "failed",
-    "data": null,
-    "error": "ERROR: [youtube] 12J_LLPRfrU: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies"
+    "url": "https://www.youtube.com/watch?v=12J_LLPRfrU"
   },
   {
+    "status": "failed",
+    "error": "coroutine raised StopIteration",
     "index": 2,
-    "url": "https://www.youtube.com/shorts/WoCtFUZXVsY",
-    "status": "failed",
-    "data": null,
-    "error": "ERROR: [youtube] WoCtFUZXVsY: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies"
+    "url": "https://www.youtube.com/watch?v=N1-YCET-39M"
   },
   {
+    "status": "failed",
+    "error": "coroutine raised StopIteration",
     "index": 3,
-    "url": "https://www.youtube.com/watch?v=N1-YCET-39M",
-    "status": "failed",
-    "data": null,
-    "error": "ERROR: [youtube] N1-YCET-39M: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies"
+    "url": "https://www.youtube.com/watch?v=d6RzGhpV1Vg"
   },
   {
+    "status": "failed",
+    "error": "coroutine raised StopIteration",
     "index": 4,
-    "url": "https://www.youtube.com/watch?v=d6RzGhpV1Vg",
-    "status": "failed",
-    "data": null,
-    "error": "ERROR: [youtube] d6RzGhpV1Vg: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies"
-  },
-  {
-    "index": 5,
-    "url": "https://www.youtube.com/watch?v=d5OWVGtZhJ4&list=PL-tKrPVkKKE00meXoxmIy6EgldK5XE-Z_",
-    "status": "failed",
-    "data": null,
-    "error": "ERROR: [youtube] d5OWVGtZhJ4: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies"
-  },
-  {
-    "index": 6,
-    "url": "https://www.youtube.com/watch?v=yGTnIy5m_L8&list=PLAu43_uf7P1-p4jiGyLyXnnq6KJDSYtlW",
-    "status": "failed",
-    "data": null,
-    "error": "ERROR: [youtube] yGTnIy5m_L8: Sign in to confirm you’re not a bot. Use --cookies-from-browser or --cookies for the authentication. See  https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp  for how to manually pass cookies. Also see  https://github.com/yt-dlp/yt-dlp/wiki/Extractors#exporting-youtube-cookies  for tips on effectively exporting YouTube cookies"
+    "url": "https://www.youtube.com/watch?v=yGTnIy5m_L8&list=PLAu43_uf7P1-p4jiGyLyXnnq6KJDSYtlW"
   }
 ]
