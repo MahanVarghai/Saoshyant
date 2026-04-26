@@ -1,4 +1,4 @@
-name: YouTube Metadata Extractor with PO Token
+name: YouTube Metadata Extractor (Flat Playlist)
 
 on:
   workflow_dispatch:
@@ -18,13 +18,19 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: 'pip'  # فعال‌سازی کش pip برای سرعت
 
-      - name: Install yt-dlp and plugin
+      - name: Install dependencies
         run: |
-          # نصب yt-dlp的最新 نسخه
           pip install yt-dlp
-          # نصب پلاگین PO Token Provider مستقیماً از PyPI
-          pip install bgutil-ytdlp-pot-provider
 
       - name: Run extraction script
-        run: python yt_info.py
+        run: python yt_scraper.py
+
+      - name: Commit and push results
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add yt_results.json
+          git commit -m "Update YouTube metadata" || echo "No changes"
+          git push
