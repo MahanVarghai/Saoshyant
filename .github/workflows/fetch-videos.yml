@@ -1,0 +1,47 @@
+name: Fetch YouTube Videos Info
+
+on:
+  workflow_dispatch:   # اجرای دستی
+  schedule:
+    - cron: '0 0 * * *'  # هر ۲۴ ساعت یک‌بار (می‌توانید تنظیم کنید)
+  push:
+    branches: [main]
+    paths:
+      - 'urls.txt'      # فقط با تغییر urls.txt اجرا شود
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+
+    # برای کامیت کردن فایل JSON نیاز به مجوز خواندن/نوشتن مخزن داریم
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install yt-dlp
+          pip install ytc
+
+      - name: Run fetch script
+        run: python fetch_video_info.py
+
+      - name: Commit updated videos_info.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add videos_info.json
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Update videos_info.json [skip ci]"
+            git push
+          fi
