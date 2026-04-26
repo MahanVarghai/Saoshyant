@@ -1,4 +1,4 @@
-name: YouTube Scraper with Nodriver (Headless)
+name: YouTube Scraper with Nodriver (Fixed)
 
 on:
   workflow_dispatch:
@@ -22,14 +22,17 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install system dependencies for Chromium
+      - name: Install system dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y \
             libgbm-dev libxkbcommon-x11-0 libxdamage1 libxrandr2 \
-            libxcomposite1 libxfixes3 libxshmfence1 \
-            libasound2t64 \
+            libxcomposite1 libxfixes3 libxshmfence1 libasound2t64 \
             fonts-liberation xvfb
+
+      - name: Install Chromium browser
+        run: |
+          sudo apt-get install -y chromium-browser
 
       - name: Install Python dependencies
         run: |
