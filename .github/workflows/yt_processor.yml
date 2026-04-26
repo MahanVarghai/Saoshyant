@@ -1,0 +1,34 @@
+name: YouTube Metadata Extractor
+
+on:
+  workflow_dispatch:
+    inputs:
+      trigger:
+        description: 'Manual trigger'
+        required: false
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install yt-dlp
+        run: pip install yt-dlp
+
+      - name: Run extraction script
+        run: python yt_info.py
+
+      - name: Commit and push results
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add yt_results.json
+          git commit -m "Update YouTube metadata" || echo "No changes"
+          git push
