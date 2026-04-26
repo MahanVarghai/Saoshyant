@@ -1,16 +1,16 @@
 import json
 import sys
-import ytc
+import os
 from yt_dlp import YoutubeDL
 
 def main():
+    # خواندن لینک‌ها از فایل urls.txt (هر خط یک لینک)
     urls = []
-    # خواندن لینک‌ها از urls.txt (هر خط یک لینک)
     try:
         with open('urls.txt', 'r', encoding='utf-8') as f:
             for line in f:
                 url = line.strip()
-                if url and not url.startswith('#'):  # رد خطوط خالی و کامنت
+                if url and not url.startswith('#'):
                     urls.append(url)
     except FileNotFoundError:
         print("❌ فایل urls.txt پیدا نشد.")
@@ -20,26 +20,32 @@ def main():
         print("⚠️ هیچ لینکی در urls.txt وجود ندارد.")
         sys.exit(0)
 
+    # دریافت محتوای کوکی از متغیر محیطی (Secret)
+    cookie_content = os.environ.get('YT_COOKIES')
+    if not cookie_content:
+        print("❌ متغیر محیطی YT_COOKIES تنظیم نشده است.")
+        sys.exit(1)
+
+    # نوشتن فایل موقت کوکی
+    with open('cookies.txt', 'w', encoding='utf-8') as f:
+        f.write(cookie_content)
+
     all_info = []
     errors = []
 
     for index, url in enumerate(urls, 1):
         print(f"🔍 [{index}/{len(urls)}] در حال دریافت اطلاعات: {url}")
         try:
-            # تنظیمات yt-dlp با استفاده از کوکی ytc
             ydl_opts = {
                 'quiet': True,
                 'no_warnings': True,
-                'cookiefile': None,  # استفاده از فایل کوکی غیرفعال شود
-                'http_headers': {
-                    'Cookie': ytc.youtube()
-                },
-                'extract_flat': False,  # اطلاعات کامل دریافت شود
+                'cookiefile': 'cookies.txt',   # استفاده از فایل کوکی
+                'extract_flat': False,
             }
 
             with YoutubeDL(ydl_opts) as ydl:
                 info = ydl.extract_info(url, download=False)
-                # فیلدهای مهم را نگه می‌داریم (قابل شخصی‌سازی)
+
                 simplified = {
                     'id': info.get('id'),
                     'title': info.get('title'),
@@ -60,8 +66,9 @@ def main():
             print(f"   ❌ خطا: {e}")
             errors.append({'index': index, 'url': url, 'error': str(e)})
 
-    # ذخیره در JSON
+    # ساخت JSON نهایی
     output = {
+        'last_update': None,  # می‌توانید یک زمان اضافه کنید اگر خواستید
         'total_videos': len(urls),
         'successful': len(all_info),
         'failed': len(errors),
@@ -73,11 +80,9 @@ def main():
         json.dump(output, f, ensure_ascii=False, indent=2)
 
     print(f"\n📁 اطلاعات در videos_info.json ذخیره شد. (موفق: {len(all_info)}, ناموفق: {len(errors)})")
-
-    # اگر خطایی رخ داده بود، هشدار می‌دهیم ولی workflow با شکست مواجه نمی‌شود
     if errors:
         print("⚠️ برخی ویدئوها با خطا مواجه شدند.")
-        sys.exit(0)  # خروج موفق (برای ادامه workflow)
+    sys.exit(0)
 
 if __name__ == '__main__':
     main()
