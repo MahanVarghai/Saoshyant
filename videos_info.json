@@ -1,4 +1,5 @@
 {
+  "last_update": null,
   "total_videos": 4,
   "successful": 0,
   "failed": 4,
@@ -7,22 +8,22 @@
     {
       "index": 1,
       "url": "https://www.youtube.com/watch?v=12J_LLPRfrU",
-      "error": "HTTPConnectionPool(host='159.223.238.179', port=8801): Max retries exceeded with url: /golden-cookies/golden-csv (Caused by NewConnectionError(\"HTTPConnection(host='159.223.238.179', port=8801): Failed to establish a new connection: [Errno 111] Connection refused\"))"
+      "error": "ERROR: invalid Netscape format cookies file 'cookies.txt': 'HttpOnly_.youtube.com\\tTRUE\\t/\\tTRUE\\t1811365968\\t__Secure-3PSID\\tg.a0009AiaFN2unyPjMb4SUY6tc3AL7thw86a_icV79IL_XBF2xDLwHNaJvY0dOGxoIWAaGwpPpAACgYKAbQSARMSFQHGX2Miw9muqhgmq2V2rb4X2VN8YhoVAUF8yKrGaSGEKmxHkgf-_OVrHhLw0076'"
     },
     {
       "index": 2,
       "url": "https://www.youtube.com/watch?v=N1-YCET-39M",
-      "error": "HTTPConnectionPool(host='159.223.238.179', port=8801): Max retries exceeded with url: /golden-cookies/golden-csv (Caused by NewConnectionError(\"HTTPConnection(host='159.223.238.179', port=8801): Failed to establish a new connection: [Errno 111] Connection refused\"))"
+      "error": "ERROR: invalid Netscape format cookies file 'cookies.txt': 'HttpOnly_.youtube.com\\tTRUE\\t/\\tTRUE\\t1811365968\\t__Secure-3PSID\\tg.a0009AiaFN2unyPjMb4SUY6tc3AL7thw86a_icV79IL_XBF2xDLwHNaJvY0dOGxoIWAaGwpPpAACgYKAbQSARMSFQHGX2Miw9muqhgmq2V2rb4X2VN8YhoVAUF8yKrGaSGEKmxHkgf-_OVrHhLw0076'"
     },
     {
       "index": 3,
       "url": "https://www.youtube.com/watch?v=d6RzGhpV1Vg",
-      "error": "HTTPConnectionPool(host='159.223.238.179', port=8801): Max retries exceeded with url: /golden-cookies/golden-csv (Caused by NewConnectionError(\"HTTPConnection(host='159.223.238.179', port=8801): Failed to establish a new connection: [Errno 111] Connection refused\"))"
+      "error": "ERROR: invalid Netscape format cookies file 'cookies.txt': 'HttpOnly_.youtube.com\\tTRUE\\t/\\tTRUE\\t1811365968\\t__Secure-3PSID\\tg.a0009AiaFN2unyPjMb4SUY6tc3AL7thw86a_icV79IL_XBF2xDLwHNaJvY0dOGxoIWAaGwpPpAACgYKAbQSARMSFQHGX2Miw9muqhgmq2V2rb4X2VN8YhoVAUF8yKrGaSGEKmxHkgf-_OVrHhLw0076'"
     },
     {
       "index": 4,
       "url": "https://www.youtube.com/watch?v=yGTnIy5m_L8&list=PLAu43_uf7P1-p4jiGyLyXnnq6KJDSYtlW",
-      "error": "HTTPConnectionPool(host='159.223.238.179', port=8801): Max retries exceeded with url: /golden-cookies/golden-csv (Caused by NewConnectionError(\"HTTPConnection(host='159.223.238.179', port=8801): Failed to establish a new connection: [Errno 111] Connection refused\"))"
+      "error": "ERROR: invalid Netscape format cookies file 'cookies.txt': 'HttpOnly_.youtube.com\\tTRUE\\t/\\tTRUE\\t1811365968\\t__Secure-3PSID\\tg.a0009AiaFN2unyPjMb4SUY6tc3AL7thw86a_icV79IL_XBF2xDLwHNaJvY0dOGxoIWAaGwpPpAACgYKAbQSARMSFQHGX2Miw9muqhgmq2V2rb4X2VN8YhoVAUF8yKrGaSGEKmxHkgf-_OVrHhLw0076'"
     }
   ]
 }
