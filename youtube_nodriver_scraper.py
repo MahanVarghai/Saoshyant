@@ -11,7 +11,7 @@ import nodriver as uc
 URL_FILE = "urls.txt"
 COOKIE_FILE = "cookies.pkl"
 OUTPUT_FILE = "yt_results.json"
-CHROME_PATH = "/usr/bin/chromium-browser"
+DEFAULT_CHROME_PATH = "/usr/bin/chromium-browser"
 
 def log(msg):
     print(f"[LOG] {msg}", flush=True)
@@ -94,29 +94,38 @@ async def get_video_info(browser, video_url, timeout=30):
 async def main():
     log("=== Starting YouTube Scraper with Nodriver ===")
     if not os.path.exists(URL_FILE):
-        print(f"Error: {URL_FILE} not found")
+        log(f"Error: {URL_FILE} not found")
         sys.exit(1)
 
     with open(URL_FILE, "r") as f:
         urls = [line.strip() for line in f if line.strip() and not line.startswith("#")]
     log(f"Found {len(urls)} URLs to process.")
 
-    # بررسی وجود کرومیم
-    if not os.path.exists(CHROME_PATH):
-        log(f"Chromium not found at {CHROME_PATH}, trying to find...")
+    # پیدا کردن مسیر کرومیم
+    chrome_path = DEFAULT_CHROME_PATH
+    if not os.path.exists(chrome_path):
+        log(f"Chromium not found at {DEFAULT_CHROME_PATH}, trying to locate...")
         result = subprocess.run(["which", "chromium-browser"], capture_output=True, text=True)
         if result.returncode == 0:
-            CHROME_PATH = result.stdout.strip()
-            log(f"Found chromium at {CHROME_PATH}")
+            chrome_path = result.stdout.strip()
+            log(f"Found chromium at {chrome_path}")
         else:
-            log("Chromium not found in PATH. Exiting.")
-            sys.exit(1)
+            # تلاش با نام chromium
+            result = subprocess.run(["which", "chromium"], capture_output=True, text=True)
+            if result.returncode == 0:
+                chrome_path = result.stdout.strip()
+                log(f"Found chromium at {chrome_path}")
+            else:
+                log("Chromium not found in PATH. Exiting.")
+                sys.exit(1)
+    else:
+        log(f"Using chromium at {chrome_path}")
 
     log("Starting browser...")
     browser = await uc.start(
         headless=True,
         sandbox=False,
-        browser_executable_path=CHROME_PATH,
+        browser_executable_path=chrome_path,
         browser_args=[
             '--disable-blink-features=AutomationControlled',
             '--no-sandbox',
