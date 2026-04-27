@@ -22,7 +22,6 @@ PLACEHOLDER_JPEG = base64.b64decode(
 )
 
 def download_thumbnail(url, save_path, max_retries=2):
-    """دانلود تامبنیل با قابلیت تلاش دوباره"""
     print(f"      📥 تلاش برای دانلود تامبنیل از {url}")
     headers = {'User-Agent': USER_AGENT}
     for attempt in range(max_retries):
@@ -75,12 +74,15 @@ def extract_formats(info):
         print(f"      🔹 نمونه: {first.get('format_id')} ({first.get('ext')}) {first.get('resolution')}")
     else:
         print("      ⚠️ هیچ فرمت قابل‌استفاده‌ای یافت نشد!")
+        if formats:
+            # نمایش یک فرمت خام برای دیباگ
+            sample = formats[0]
+            print(f"      🔍 نمونه فرمت خام: {sample}")
     return useful
 
 def main():
     print(f"🚀 شروع اجرا در {datetime.now(timezone.utc).isoformat()}")
     
-    # خواندن URLها
     urls = []
     try:
         with open('urls.txt', 'r', encoding='utf-8') as f:
@@ -97,7 +99,6 @@ def main():
         print("⚠️ هیچ لینکی در urls.txt وجود ندارد.")
         sys.exit(0)
 
-    # آماده‌سازی کوکی
     cookie_content = os.environ.get('YT_COOKIES')
     if not cookie_content:
         print("❌ متغیر محیطی YT_COOKIES تنظیم نشده است.")
@@ -107,7 +108,6 @@ def main():
         f.write(cookie_content)
     print("✅ فایل کوکی (از پیش تمیز) ذخیره شد.")
 
-    # ساخت پوشهٔ موقت برای تامبنیل‌ها
     temp_thumb_dir = tempfile.mkdtemp(prefix='youtube_thumbs_')
     print(f"📁 پوشهٔ موقت تامبنیل‌ها: {temp_thumb_dir}")
 
@@ -123,7 +123,7 @@ def main():
                 'cookiefile': 'cookies.txt',
                 'extract_flat': False,
                 'ignore_no_formats_error': True,
-                'extractor_args': {'youtube': {'player_client': ['web']}},
+                # extractor_args حذف شد تا فرمت‌های کامل دریافت شوند
             }
 
             print("   ⏳ دریافت اطلاعات از یوتیوب...")
@@ -135,7 +135,6 @@ def main():
             print(f"   🆔 شناسه: {video_id}")
             print(f"   📺 عنوان: {title}")
 
-            # دانلود تامبنیل
             thumb_filename = f"{video_id}.jpg"
             thumb_path = os.path.join(temp_thumb_dir, thumb_filename)
             thumb_downloaded = False
@@ -149,17 +148,13 @@ def main():
                 thumb_downloaded = download_thumbnail(thumb_url, thumb_path)
 
             if not thumb_downloaded:
-                # نوشتن placeholder JPEG واقعی
                 with open(thumb_path, 'wb') as f:
                     f.write(PLACEHOLDER_JPEG)
                 print(f"   ⚠️ تامبنیل دریافت نشد، از placeholder استاندارد استفاده شد.")
             else:
                 print(f"   ✅ تامبنیل ذخیره شد: {thumb_filename}")
 
-            # dislike_count
             dislike_count = info.get('dislike_count')
-
-            # استخراج فرمت‌ها
             formats_list = extract_formats(info)
 
             simplified = {
@@ -176,7 +171,7 @@ def main():
                 'categories': info.get('categories'),
                 'tags': info.get('tags'),
                 'url': url,
-                'thumbnail': thumb_filename,   # فقط نام فایل، بدون مسیر
+                'thumbnail': thumb_filename,
                 'formats': formats_list
             }
             all_info.append(simplified)
@@ -199,7 +194,6 @@ def main():
         json.dump(output, f, ensure_ascii=False, indent=2)
     print(f"\n📁 فایل videos_info.json ذخیره شد. (موفق: {len(all_info)}, ناموفق: {len(errors)})")
 
-    # ساخت ZIP با محتویات پوشهٔ موقت
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     zip_filename = f"youtube_data_{timestamp}.zip"
     print(f"📦 ساخت فایل ZIP: {zip_filename}")
@@ -212,13 +206,10 @@ def main():
                 zf.write(full_path, arcname)
     print(f"✅ ZIP ساخته شد.")
 
-    # ذخیرهٔ نام ZIP برای workflow
-    zip_name_file = 'zip_name.txt'
-    with open(zip_name_file, 'w') as f:
+    with open('zip_name.txt', 'w') as f:
         f.write(zip_filename)
-    print(f"📝 نام فایل ZIP در {zip_name_file} ذخیره شد.")
+    print(f"📝 نام فایل ZIP در zip_name.txt ذخیره شد.")
 
-    # پاک‌سازی
     print("🧹 پاکسازی فایل‌های موقت...")
     shutil.rmtree(temp_thumb_dir)
     if os.path.exists('cookies.txt'):
