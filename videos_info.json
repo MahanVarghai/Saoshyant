@@ -1,5 +1,5 @@
 {
-  "last_update": "2026-04-27T02:25:45.899794Z",
+  "last_update": "2026-04-27T03:21:25.189947+00:00",
   "total_videos": 8,
   "successful": 8,
   "failed": 0,
@@ -12,15 +12,15 @@
       "upload_date": "20231110",
       "uploader": "Kurzgesagt – In a Nutshell",
       "channel_id": "UCsXVk37bltHxD1rDPwtNM8Q",
-      "view_count": 16724307,
-      "like_count": 728610,
+      "view_count": 16724422,
+      "like_count": 728611,
       "dislike_count": null,
       "categories": [
         "Education"
       ],
       "tags": [],
       "url": "https://www.youtube.com/watch?v=S7TUe5w6RHo",
-      "thumbnail": "thumbnails/S7TUe5w6RHo.jpg",
+      "thumbnail": "S7TUe5w6RHo.jpg",
       "formats": []
     },
     {
@@ -31,8 +31,8 @@
       "upload_date": "20160623",
       "uploader": "Kurzgesagt – In a Nutshell",
       "channel_id": "UCsXVk37bltHxD1rDPwtNM8Q",
-      "view_count": 23935144,
-      "like_count": 595114,
+      "view_count": 23935212,
+      "like_count": 595110,
       "dislike_count": null,
       "categories": [
         "Education"
@@ -67,7 +67,7 @@
         "documentary"
       ],
       "url": "https://www.youtube.com/watch?v=dGiQaabX3_o&t=31s",
-      "thumbnail": "thumbnails/dGiQaabX3_o.jpg",
+      "thumbnail": "dGiQaabX3_o.jpg",
       "formats": []
     },
     {
@@ -86,7 +86,7 @@
       ],
       "tags": [],
       "url": "https://www.youtube.com/watch?v=d_MfWIuy9QY",
-      "thumbnail": "thumbnails/d_MfWIuy9QY.jpg",
+      "thumbnail": "d_MfWIuy9QY.jpg",
       "formats": []
     },
     {
@@ -97,8 +97,8 @@
       "upload_date": "20130908",
       "uploader": "pat demsey",
       "channel_id": "UC_H34cHvaKUVsYyjWLip0-A",
-      "view_count": 29112808,
-      "like_count": 271581,
+      "view_count": 29112854,
+      "like_count": 271580,
       "dislike_count": null,
       "categories": [
         "Sports"
@@ -107,7 +107,7 @@
         "You'll Never Walk Alone (Composition)"
       ],
       "url": "https://www.youtube.com/watch?v=Go-jJlGd1so&pp=ygUeeW91IHdpbGwgbmV2ZXIgd2FsayBhbG9uZSBzb25n",
-      "thumbnail": "thumbnails/Go-jJlGd1so.jpg",
+      "thumbnail": "Go-jJlGd1so.jpg",
       "formats": []
     },
     {
@@ -146,7 +146,7 @@
         "vegan diet"
       ],
       "url": "https://www.youtube.com/watch?v=aGXqgoMhvIg",
-      "thumbnail": "thumbnails/aGXqgoMhvIg.jpg",
+      "thumbnail": "aGXqgoMhvIg.jpg",
       "formats": []
     },
     {
@@ -189,7 +189,7 @@
         "spaghetti"
       ],
       "url": "https://www.youtube.com/watch?v=KIe8ou8qj-w",
-      "thumbnail": "thumbnails/KIe8ou8qj-w.jpg",
+      "thumbnail": "KIe8ou8qj-w.jpg",
       "formats": []
     },
     {
@@ -200,8 +200,8 @@
       "upload_date": "20180920",
       "uploader": "NOT ANOTHER COOKING SHOW",
       "channel_id": "UCuL-5ytBmu6KG0BwjSFaD0g",
-      "view_count": 2243627,
-      "like_count": 46641,
+      "view_count": 2243632,
+      "like_count": 46639,
       "dislike_count": null,
       "categories": [
         "Howto & Style"
@@ -226,7 +226,7 @@
         "no cheese"
       ],
       "url": "https://www.youtube.com/watch?v=a0EyzJsf1eo",
-      "thumbnail": "thumbnails/a0EyzJsf1eo.jpg",
+      "thumbnail": "a0EyzJsf1eo.jpg",
       "formats": []
     },
     {
@@ -253,7 +253,7 @@
         "delicious Italian food recipes"
       ],
       "url": "https://www.youtube.com/watch?v=VGWN9_dDgqg",
-      "thumbnail": "thumbnails/VGWN9_dDgqg.jpg",
+      "thumbnail": "VGWN9_dDgqg.jpg",
       "formats": []
     }
   ],
