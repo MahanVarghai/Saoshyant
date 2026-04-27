@@ -12,7 +12,6 @@ from yt_dlp import YoutubeDL
 
 USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36'
 
-# تصویر جایگزین JPEG معتبر ۱×۱ پیکسل (بیس۶۴)
 PLACEHOLDER_JPEG = base64.b64decode(
     "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMCwsK"
     "CwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQU"
@@ -46,13 +45,13 @@ def download_thumbnail(url, save_path, max_retries=2):
     return False
 
 def extract_formats(info):
-    """استخراج لیست فرمت‌های ویدئو با حجم"""
     formats = info.get('formats', [])
     print(f"      📋 تعداد فرمت‌های خام دریافت‌شده: {len(formats)}")
     useful = []
     for fmt in formats:
         vcodec = fmt.get('vcodec', 'none')
         acodec = fmt.get('acodec', 'none')
+        # دقت کنیم که 'none' همان رشته است
         if vcodec == 'none' and acodec == 'none':
             continue
         size = fmt.get('filesize') or fmt.get('filesize_approx')
@@ -75,8 +74,8 @@ def extract_formats(info):
     else:
         print("      ⚠️ هیچ فرمت قابل‌استفاده‌ای یافت نشد!")
         if formats:
-            # نمایش یک فرمت خام برای دیباگ
             sample = formats[0]
+            # نمایش کلیدهای اصلی فرمت برای دیباگ
             print(f"      🔍 نمونه فرمت خام: {sample}")
     return useful
 
@@ -118,12 +117,15 @@ def main():
         print(f"\n🔍 [{index}/{len(urls)}] پردازش: {url}")
         try:
             ydl_opts = {
-                'quiet': True,
-                'no_warnings': True,
+                'quiet': False,                # نمایش تمام خروجی yt-dlp
+                'no_warnings': False,
+                'verbose': True,               # هرچه بیشتر جزئیات
                 'cookiefile': 'cookies.txt',
                 'extract_flat': False,
-                'ignore_no_formats_error': True,
-                # extractor_args حذف شد تا فرمت‌های کامل دریافت شوند
+                'ignore_no_formats_error': False,  # اگر فرمت واقعی نبود، خطا بدهد
+                'skip_download': True,
+                # ترکیب کلاینت اندروید و وب برای دریافت کامل فرمت‌ها
+                'extractor_args': {'youtube': {'player_client': ['android', 'web']}},
             }
 
             print("   ⏳ دریافت اطلاعات از یوتیوب...")
