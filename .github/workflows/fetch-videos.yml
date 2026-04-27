@@ -23,11 +23,11 @@ jobs:
       - name: 📦 Install dependencies
         run: pip install yt-dlp requests
 
-      - name: 🧹 پاک‌سازی فایل‌های قدیمی (ZIPهای قبلی اختیاری)
+      - name: 🧹 پاک‌سازی فایل‌های قدیمی
         run: |
           set -x
-          rm -f youtube_data_*.zip       # فقط ZIP جدید باقی می‌ماند
-          rm -rf thumbnails 2>/dev/null || true   # پوشهٔ قدیمی اگر وجود داشت
+          rm -f youtube_data_*.zip
+          rm -rf thumbnails 2>/dev/null || true
 
       - name: 🚀 اجرای اسکریپت دریافت اطلاعات
         env:
@@ -36,12 +36,12 @@ jobs:
           set -x
           python fetch_video_info.py
 
-      - name: 📋 نمایش محتویات پوشه (برای اشکال‌زدایی)
+      - name: 📋 نمایش محتویات پوشه
         run: |
           set -x
           ls -lah
 
-      - name: 💾 کامیت و پوش فایل‌های جدید (JSON + ZIP)
+      - name: 💾 کامیت و پوش فایل‌های جدید
         run: |
           set -x
           git config user.name "github-actions[bot]"
@@ -51,6 +51,6 @@ jobs:
             echo "✅ هیچ تغییری برای کامیت وجود ندارد."
           else
             git commit -m "به‌روزرسانی داده‌های ویدئوها و فایل ZIP [skip ci]"
-            git pull --rebase -X theirs origin main
+            git pull --rebase --autostash -X theirs origin main
             git push
           fi
