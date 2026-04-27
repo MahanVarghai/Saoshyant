@@ -12,41 +12,45 @@ jobs:
       contents: write
 
     steps:
-      - name: Checkout repository
+      - name: 📥 Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Set up Python
+      - name: 🐍 Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
 
-      - name: Install yt-dlp and requests
+      - name: 📦 Install dependencies
         run: pip install yt-dlp requests
 
-      - name: Run fetch script
+      - name: 🧹 پاک‌سازی فایل‌های قدیمی (ZIPهای قبلی اختیاری)
+        run: |
+          set -x
+          rm -f youtube_data_*.zip       # فقط ZIP جدید باقی می‌ماند
+          rm -rf thumbnails 2>/dev/null || true   # پوشهٔ قدیمی اگر وجود داشت
+
+      - name: 🚀 اجرای اسکریپت دریافت اطلاعات
         env:
           YT_COOKIES: ${{ secrets.YT_COOKIES }}
-        run: python fetch_video_info.py
-
-      - name: Commit updated files (JSON, thumbnails, ZIP)
         run: |
+          set -x
+          python fetch_video_info.py
+
+      - name: 📋 نمایش محتویات پوشه (برای اشکال‌زدایی)
+        run: |
+          set -x
+          ls -lah
+
+      - name: 💾 کامیت و پوش فایل‌های جدید (JSON + ZIP)
+        run: |
+          set -x
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          # اضافه کردن فایل‌های جدید
-          git add videos_info.json thumbnails/ *.zip
-
+          git add videos_info.json zip_name.txt *.zip
           if git diff --staged --quiet; then
-            echo "No changes to commit."
+            echo "✅ هیچ تغییری برای کامیت وجود ندارد."
           else
-            git commit -m "Update videos data and zip [skip ci]"
+            git commit -m "به‌روزرسانی داده‌های ویدئوها و فایل ZIP [skip ci]"
             git pull --rebase -X theirs origin main
             git push
           fi
